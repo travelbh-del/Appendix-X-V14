@@ -1,3 +1,118 @@
+# Appendix X --- Version 12
+
+## Contract‑Coupled Governance (CCG)
+
+**Contracts Protect the Architecture.\
+ARoT Protects the Machine.**
+
+------------------------------------------------------------------------
+
+## Purpose
+
+Contract‑Coupled Governance (CCG) introduces a structured mechanism
+linking contractual agreements governing AI deployment to measurable
+system drift signals.
+
+AI systems evolve through updates, retraining, and operational
+interaction, while contracts are typically static agreements. CCG
+provides a governance interface allowing contractual oversight to
+respond to measurable behavioral drift while preserving operational
+continuity and human authority over contractual change.
+
+CCG operates **upstream of the Alignment Root of Trust (ARoT)** as a
+governance interface layer and **does not modify ARoT invariants
+directly**.
+
+------------------------------------------------------------------------
+
+## Four Pillars
+
+### 1. Contract Baseline Integrity
+
+Signed contractual terms are loaded into the **Contract Monitoring
+Component (CMC)** as the baseline reference for measurement.\
+The agreement defines the operational expectations against which system
+behavior is evaluated.
+
+### 2. Independent Drift Measurement
+
+The CMC continuously evaluates system behavior against the contractual
+baseline.\
+Drift measurement should be independently verifiable and recorded in
+tamper‑resistant audit logs.
+
+### 3. Human‑Governed Renegotiation
+
+When drift exceeds a predefined threshold, **mandatory governance review
+and renegotiation procedures are triggered**.
+
+Drift signals initiate review but **do not autonomously modify
+contractual terms**.
+
+### 4. Constitutional Enforcement Boundary
+
+If renegotiation fails, or severe misalignment is detected, the signal
+is passed downstream to **ARoT**, which may halt operation and trigger
+**failover to the last known safe state**.
+
+------------------------------------------------------------------------
+
+## Governance Cascade
+
+Contract terms loaded into CMC\
+→ Continuous drift measurement\
+→ Drift threshold exceeded\
+→ Mandatory governance review triggered\
+→ Contract renegotiation initiated
+
+**If agreement is reached:** updated terms are loaded into CMC.
+
+**If agreement fails:** ARoT enforcement triggers halt and failover to
+the last known safe state.
+
+------------------------------------------------------------------------
+
+## Architectural Placement
+
+Application / Mission Layer\
+→ Contract‑Coupled Governance (CCG)\
+→ Contract Monitoring Component (CMC)\
+→ Predictive / Alignment Layer\
+→ Alignment Root of Trust (ARoT)\
+→ Failover to Last Known Safe State
+
+------------------------------------------------------------------------
+
+## Three‑Layer Safety Model
+
+Appendix X organizes safe AI system design into three distinct layers:
+
+**Governance Layer**\
+Contracts, review procedures, and renegotiation authority.
+
+**Measurement Layer**\
+CMC monitoring, drift scoring, and audit logging.
+
+**Constitutional Enforcement Layer**\
+ARoT invariants, halt conditions, and failover to safe state.
+
+Governance decides.\
+Measurement detects.\
+ARoT enforces.
+
+------------------------------------------------------------------------
+
+## Architectural Significance
+
+CCG bridges technical measurement with contractual governance.\
+By linking measurable drift signals to governance review and enforcement
+boundaries, contracts become **structurally responsive rather than
+static point‑in‑time agreements**.
+
+This framework is intended as a **non‑proprietary reference
+architecture** for discussion and experimentation in safe AI system
+design.
+
 # Appendix X — Operational Continuity & Enforcement (V10)
 
 ## X.0 Constitutional Position
