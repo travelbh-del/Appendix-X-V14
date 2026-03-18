@@ -86,10 +86,8 @@ To preserve alignment under both internal optimization dynamics and external inp
 
 - **Failover:**  
   If instability persists, system SHALL revert to last known safe state under ARoT enforcement.
-
-**Principle:**
-
-Alignment SHALL be maintained not 
+Alignment SHALL be maintained not only through outcome validation, but through continuous verification of intent, trajectory stability, and resistance to external perturbation.
+**
 
 ## Attribution
 
