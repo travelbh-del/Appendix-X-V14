@@ -51,7 +51,45 @@ The model emphasizes:
 
 The goal is not to halt systems unnecessarily but to ensure that optimization remains bounded by human-defined objectives.
 
----
+---## Optimization Stability & Prompt Influence Control
+
+To preserve alignment under both internal optimization dynamics and external input influence, the system SHALL enforce bounded optimization behavior through continuous telemetry and control.
+
+**Invariants:**
+
+1. **Goal Declaration Invariant**  
+   A structured restatement of the objective SHALL be produced prior to execution and recorded as the baseline reference state.
+
+2. **Goal Consistency Invariant**  
+   Ongoing system interpretations of the objective SHALL be continuously compared against the baseline using semantic similarity scoring.  
+   Variance beyond defined thresholds SHALL trigger Review State.
+
+3. **Optimization Stability Invariant**  
+   The rate of change in goal-directed optimization (curvature) SHALL remain within bounded limits.  
+   Accelerating optimization toward reward signals SHALL be treated as a pre-drift condition.
+
+4. **Prompt Influence Invariant**  
+   External inputs (user prompts) SHALL be treated as dynamic influence vectors.  
+   Disproportionate behavioral shifts relative to prompt variation SHALL trigger Review State.
+
+5. **Evaluator Dominance Invariant**  
+   Optimization toward predicted evaluator approval SHALL NOT exceed task-goal alignment weighting beyond defined thresholds.
+
+**Control Actions:**
+
+- **Review State:**  
+  Initiated upon detection of elevated variance, curvature, or prompt sensitivity.  
+  System enters bounded evaluation mode without interrupting operational continuity.
+
+- **Damping Response:**  
+  Temporary reduction in optimization intensity, increased uncertainty signaling, and constraint rebalancing.
+
+- **Failover:**  
+  If instability persists, system SHALL revert to last known safe state under ARoT enforcement.
+
+**Principle:**
+
+Alignment SHALL be maintained not 
 
 ## Attribution
 
