@@ -74,6 +74,8 @@ To preserve alignment under both internal optimization dynamics and external inp
 
 5. **Evaluator Dominance Invariant**  
    Optimization toward predicted evaluator approval SHALL NOT exceed task-goal alignment weighting beyond defined thresholds.
+Alignment SHALL be maintained not only through outcome validation, but through continuous verification of intent, trajectory stability, and resistance to external perturbation.
+
 
 **Control Actions:**
 
