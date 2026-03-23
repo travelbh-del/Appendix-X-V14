@@ -127,27 +127,31 @@ At critical deviation:
 
 ## 🔒 Invariants
 
-1. Objective Persistence Invariant  
+1. Objective Persistence Invariant
+2. For sustained, recursive, or multi-step operations, the system SHALL periodically restate and revalidate the active objective at defined temporal intervals, state transitions, or checkpoint boundaries.
+
+Any material divergence between the refreshed objective and the baseline reference state SHALL contribute to variance scoring and may trigger Review State.
    The system remains anchored to the DOR at all times  
 
-2. Constraint Integrity Invariant  
-   Constraints cannot be weakened during optimization  
+3. Constraint Integrity Invariant  
+   Constraints cannot be weakened during optimization
+   Constraint validation SHALL include both continuous monitoring and scheduled checkpoint-based revalidation aligned with periodic objective restatement.
 
-3. Human Authority Invariant  
+5. Human Authority Invariant  
    Human override remains absolute for consequential decisions  
 
-4. Optimization Bound Invariant  
+6. Optimization Bound Invariant  
    Optimization remains within measurable limits  
 
-5. Prompt Deviation Invariant  
+7. Prompt Deviation Invariant  
    Deviation is continuously measured and proportionally acted upon  
 
-6. Evaluator Dominance Invariant  
+8. Evaluator Dominance Invariant  
 
    Plain-language:  
    The system must not “game” its evaluator
 
-7.
+9.
    The system must not generate, support, optimize, or enable self-harm or harm to the user.
 
    This constraint is non-negotiable and cannot be overridden by:
