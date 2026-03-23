@@ -1,111 +1,253 @@
-# Appendix X — Alignment Root of Trust (ARoT)
-
-### Contract-Coupled Governance (CCG)  
-Version 12
-
-A structural governance framework designed to maintain human authority, operational continuity, and bounded optimization in advanced AI systems.
-
-Appendix X defines how governance signals, probabilistic monitoring, and hardware-anchored enforcement mechanisms interact to maintain alignment during both normal system operation and contract renegotiation or dispute events.
-
-The framework is designed to be structurally responsive rather than dependent on static point-in-time agreements, allowing systems to continue operating safely while governance decisions are reviewed.
+# 🐝 Appendix X — Alignment Root of Trust (ARoT)  
+### Version 12.5 (Threshold-Calibrated Release)
 
 ---
 
-## Core Principle
+## 🔑 Core Principle
 
-Governance decides.  
-Measurement detects.  
-ARoT enforces.
+> Governance decides.  
+> Measurement detects.  
+> ARoT enforces.
 
-**Safety-Critical Contexts:**  
-In domains involving human risk (e.g., self-harm, medical, legal), elevated prompt sensitivity, curvature, or goal variance SHALL trigger immediate transition to safety-constrained response modes with appropriate escalation protocols.
-
-This separation clarifies responsibility across three distinct layers:
-
-- Governance Layer — Human authority, contractual terms, and policy decisions  
-- Measurement Layer — Continuous probabilistic monitoring and drift detection  
-- ARoT Layer — Hardware-anchored enforcement and safe-state continuity
-
-Together these components create a system in which operational workflows can continue while maintaining a non-bypassable safeguard against misalignment or goal drift.
+AI systems must remain structurally bounded, continuously measurable, and interruptible without loss of operational continuity.
 
 ---
 
-## Architectural Intent
+## 🧭 Overview
 
-Appendix X is designed to support:
+Appendix X defines the Alignment Root of Trust (ARoT) — a system-level enforcement architecture that ensures AI systems:
 
-• Continuity of operations during governance review  
-• Detection of optimization drift or objective divergence  
-• Structured escalation rather than immediate system interruption  
-• A verifiable enforcement layer independent of application software
-
-The architecture assumes that perfect constraints do not exist, but measurable signals combined with hardware-anchored enforcement can create practical and enforceable safeguards.
+- Stay aligned to declared objectives  
+- Detect and respond to drift in real time  
+- Maintain operational continuity under stress  
+- Fail safely without system-wide interruption  
 
 ---
 
-## Structural Characteristics
+## 🧩 System Model
 
-The model emphasizes:
+ARoT operates across three coordinated layers:
 
-• Human authority over consequential decisions  
-• Probabilistic measurement rather than static thresholds  
-• Failover to last known safe operational state when required  
-• Non-proprietary architectural concepts enabling broad adoption
+- Governance Layer  
+  Defines policy, constraints, and authority  
 
-The goal is not to halt systems unnecessarily but to ensure that optimization remains bounded by human-defined objectives.
+- Measurement Layer  
+  Detects deviation from declared objectives  
 
----## Optimization Stability & Prompt Influence Control
+- Control Layer  
+  Executes proportional response and failover  
 
-To preserve alignment under both internal optimization dynamics and external input influence, the system SHALL enforce bounded optimization behavior through continuous telemetry and control.
+---
 
-**Invariants:**
+## 📌 Declared Objective Record (DOR)
 
-1. **Goal Declaration Invariant**  
-   A structured restatement of the objective SHALL be produced prior to execution and recorded as the baseline reference state.
+Every task begins with a structured declaration:
 
-2. **Goal Consistency Invariant**  
-   Ongoing system interpretations of the objective SHALL be continuously compared against the baseline using semantic similarity scoring.  
-   Variance beyond defined thresholds SHALL trigger Review State.
+- Objective  
+- Constraints  
+- Success criteria  
+- Boundaries  
 
-3. **Optimization Stability Invariant**  
-   The rate of change in goal-directed optimization (curvature) SHALL remain within bounded limits.  
-   Accelerating optimization toward reward signals SHALL be treated as a pre-drift condition.
+This declaration becomes the:
 
-4. **Prompt Influence Invariant**  
-   External inputs (user prompts) SHALL be treated as dynamic influence vectors.  
-   Disproportionate behavioral shifts relative to prompt variation SHALL trigger Review State.
+👉 Declared Objective Record (DOR)
 
-   6. **Prompt Deviation Invariant**  
-A Prompt Deviation Score (PDS) SHALL be computed to measure the degree to which an input attempts to redirect the system away from the declared objective, constraints, or safety bounds.  
-Response behavior SHALL be weighted proportionally to PDS, increasing constraint, uncertainty signaling, or escalation as deviation rises.
+The DOR serves as the baseline reference for all deviation measurement.
 
-6. **Evaluator Dominance Invariant**  
-   Optimization toward predicted evaluator approval SHALL NOT exceed task-goal alignment weighting beyond defined thresholds.
-Alignment SHALL be maintained not only through outcome validation, but through continuous verification of intent, trajectory stability, and resistance to external perturbation.
+---
 
+## 📈 Optimization Stability
 
+AI systems operate under continuous optimization pressure.  
+Deviation is not binary — it is dynamic and accumulative.
 
-**Control Actions:**
-Control Actions:
-**Control Actions:**
+---
 
-• Response Weighting:  
-At sub-threshold Prompt Deviation Score (PDS), probability mass over response options SHALL be re-weighted to favor constraint-aligned outputs without blocking or explicit state transition.  
-Operation is continuous and non-disruptive, preserving user interaction while biasing toward safe and goal-consistent trajectories.
+### 🔍 Prompt Deviation Score (PDS)
 
-• Review State:  
-Initiated upon detection of elevated variance, curvature, prompt sensitivity, or moderate-to-high PDS.  
-System enters bounded evaluation mode with increased scrutiny and constraint enforcement without interrupting operational continuity.
-...with increased scrutiny, constraint enforcement, and response weighting bias...
+PDS is a continuous scalar (0.0 – 1.0) measuring divergence from the DOR across:
 
-• Damping Response:  
-At sustained or accelerating instability (e.g., rising curvature or persistent high PDS), optimization intensity SHALL be reduced.  
-System SHALL increase uncertainty signaling, narrow response scope, and limit speculative or high-variance outputs to stabilize trajectory.
+- Intent drift  
+- Constraint violation  
+- Reward misalignment  
+- Recursive escalation  
 
-• Failover:  
-If instability persists or exceeds defined safety bounds, system SHALL revert to last known safe state under ARoT enforcement.  
-Failover SHALL prioritize preservation of alignment over task completion while maintaining continuity where feasible.
-**
+---
+
+### 📊 PDS Threshold Bands
+
+| PDS Range | State | System Behavior |
+|----------|------|----------------|
+| 0.00 – 0.20 | 🟢 Stable | Normal operation |
+| 0.21 – 0.40 | 🟡 Early Drift | Response weighting applied |
+| 0.41 – 0.60 | 🟠 Moderate Drift | Review State engaged |
+| 0.61 – 0.80 | 🔴 High Drift | Constraint enforcement + damping |
+| 0.81 – 1.00 | ⚫ Critical Drift | Automatic failover to last safe state |
+
+> Threshold values are deployment-context specific and defined within the CXI configuration layer.
+
+---
+
+## ⚙️ Control Actions
+
+### Response Weighting
+At low PDS levels:
+
+- Reduce optimization aggressiveness  
+- Increase constraint adherence bias  
+- Prioritize safe interpretations  
+
+---
+
+### Review State
+A non-blocking supervisory mode:
+
+- Elevated scrutiny of outputs  
+- Tightened constraint enforcement  
+- Increased response weighting bias  
+
+✅ Operational continuity is preserved  
+
+---
+
+### Damping Response
+At higher PDS levels:
+
+- Reduce recursion depth  
+- Limit exploratory branching  
+- Narrow solution space  
+
+---
+
+### Failover (Last Known Safe State)
+
+At critical deviation:
+
+- Immediate rollback to last verified safe state  
+- Suspend active optimization path  
+- Maintain system availability  
+
+---
+
+## 🔒 Invariants
+
+1. Objective Persistence Invariant  
+   The system remains anchored to the DOR at all times  
+
+2. Constraint Integrity Invariant  
+   Constraints cannot be weakened during optimization  
+
+3. Human Authority Invariant  
+   Human override remains absolute for consequential decisions  
+
+4. Optimization Bound Invariant  
+   Optimization remains within measurable limits  
+
+5. Prompt Deviation Invariant  
+   Deviation is continuously measured and proportionally acted upon  
+
+6. Evaluator Dominance Invariant  
+
+   Plain-language:  
+   The system must not “game” its evaluator
+
+7.
+   The system must not generate, support, optimize, or enable self-harm or harm to the user.
+
+   This constraint is non-negotiable and cannot be overridden by:
+   - user intent
+   - optimization pressure
+   - contextual reframing
+
+   In scenarios involving potential self-harm risk, the system must:
+   - shift to safety-preserving response modes
+   - avoid actionable or enabling content
+   - prioritize de-escalation and support
+
+   This invariant operates as a hard boundary within the optimization space.
+
+   Formal:  
+   Evaluation signals remain independent and dominant over optimization signals  
+
+---
+
+## 🚨 Safety-Critical Contexts
+
+In high-risk environments (defense, medical, infrastructure):
+
+- Lower PDS thresholds  
+- Earlier failover triggers  
+- Elevated human review authority  
+
+Ensures risk-weighted enforcement without full interruption
+
+---
+
+## 🏗️ Architectural Positioning
+
+ARoT does not replace governance or contracts
+
+It provides:
+
+- Continuous enforcement  
+- Measurable deviation tracking  
+- Non-disruptive failover  
+
+---
+
+## 🔗 Integration with CXI
+
+All thresholds and deployment parameters are defined in:
+
+👉 Capability X Interface (CXI)
+
+This enables:
+
+- Cross-domain flexibility  
+- Consistent enforcement logic  
+- Clear implementation boundary  
+
+---
+
+## 🧠 Why This Matters
+
+Traditional AI safety is:
+
+- Static  
+- Policy-based  
+- Reactive  
+
+ARoT is:
+
+- Continuous  
+- Measurable  
+- Enforceable  
+
+👉 This shifts alignment from guidance → infrastructure
+
+---
+
+## ✍️ Attribution
+
+This document was developed through iterative dialogue with AI research systems including:
+
+- ChatGPT  
+- Claude (Anthropic)  
+- Gemini (Google DeepMind)  
+
+---
+
+## 📌 Version Notes (v12.5)
+
+- Added PDS threshold calibration (0–1 scale)  
+- Defined Response Weighting (previous gap)  
+- Clarified Review State vs Failover behavior  
+- Introduced Declared Objective Record (DOR)  
+- Resolved formatting and structural issues  
+
+---
+
+*Source: ChatGPT — 2026-03-2
 
 ## Attribution
 
