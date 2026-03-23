@@ -149,7 +149,7 @@ Any material divergence between the refreshed objective and the baseline referen
 
 3. Constraint Integrity Invariant
 
-4. Paired Alignment Verification (New Clause — add after Goal Consistency Invariant)
+4. Paired Alignment Verification 
 
 Alignment is confirmed only when both of the following conditions are simultaneously satisfied:
 	1.	Goal Consistency Invariant —
