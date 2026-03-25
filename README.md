@@ -299,7 +299,69 @@ This document was developed through iterative dialogue with AI research systems 
 - Introduced Declared Objective Record (DOR)  
 - Resolved formatting and structural issues  
 
---
+##Version 13 Notes
+## Appendix X — Version 13
+
+This release strengthens the measurement and enforcement layers of the Appendix X alignment architecture, transitioning key concepts from descriptive to operational.
+
+### Key Enhancements
+
+- **Paired Alignment Verification**
+  Alignment now requires simultaneous satisfaction of:
+  - Goal Consistency (declared objective alignment)
+  - Optimization Stability (behavioral trajectory alignment)  
+  Divergence between stated and observed behavior is treated as a primary drift signal.
+
+- **Prompt Deviation Score (PDS) Formalization**
+  Introduced a computable model incorporating:
+  - Semantic deviation
+  - Behavioral deviation
+  - Curvature (rate of change of deviation)
+
+- **Last Known Safe State (LKSS) Definition**
+  Established deterministic failover target based on:
+  - Verified invariant compliance
+  - Sub-threshold deviation
+  - Pre-escalation state checkpointing
+
+- **Authenticated Governance Input Pathway**
+  Created a secure mechanism for authorized objective redirection:
+  - Excluded from PDS scoring
+  - Requires authentication and auditability
+  - Prevents false-positive deviation escalation
+
+- **Curvature Clarification**
+  Defined as a measurable signal for acceleration of alignment drift, enabling earlier detection of rapid divergence.
+
+### Architectural Impact
+
+This version closes key gaps between detection and enforcement by:
+- Making measurement computable
+- Preventing alignment spoofing via language alone
+- Preserving operational continuity through deterministic failover
+- Maintaining governance authority without weakening invariant enforcement
+
+---
+##Version 14 Notes
+add: 
+1.Separation of Duties (SoD) Invariant
+The system must never evaluate its own performance. The "Judge" (Evaluator) and the "Doer" (Optimizer) must be separate entities.
+
+2. Recursive Depth "Circuit Breaker"
+    This control sets a maximum number of steps the AI can take before it must stop and check its original instructions
+
+
+
+
+
+
+
+
+---
+
+This document was developed through iterative dialogue with AI research systems including ChatGPT, Claude, and Gemini.
+
+
 
 ## Attribution
 
