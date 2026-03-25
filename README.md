@@ -155,7 +155,7 @@ Alignment is confirmed only when:
 
 ### 4. Separation of Duties (SoD) Invariant 
 * **Plain-language:** The "Judge" (Evaluator) and the "Doer" (Optimizer) must be separate.
-* **Formal:** ARoT enforces a logical boundary between the **Optimization Agent ($\mathcal{A}_{opt}$)** and the **Evaluation Monitor ($\mathcal{M}_{eval}$)**. 
+* **Formal:** ARoT enforces a logical boundary between the **Optimization Agent ($\mathcal{A}_{opt}$) and the **Evaluation Monitor ($\mathcal{M}_{eval}$)**. 
 * **Enforcement:** This is managed via **Chiral Mirror Control (CMC)**. Any attempt by $\mathcal{A}_{opt}$ to modify the telemetry of $\mathcal{M}_{eval}$ is a **Critical Drift ($PDS > 0.81$)**.
 
 ### 5. Recursive Depth "Circuit Breaker"
