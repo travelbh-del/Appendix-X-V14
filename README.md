@@ -138,75 +138,37 @@ At critical deviation:
 - Suspend active optimization path  
 - Maintain system availability
 
-- Administrative & Structural Controls
-To prevent "reward tampering" or "black-box drift," the following structural invariants are enforced:
-1. Separation of Duties (SoD) Invariant
-Plain-language: The system must never evaluate its own performance. The "Judge" (Evaluator) and the "Doer" (Optimizer) must be separate entities. This prevents the AI from "gaming" the system or hiding its own mistakes to meet an objective.
-Formal: The ARoT shall enforce a strict logical boundary between the Optimization Agent (\bm{\mathcal{A}_{opt}}) and the Evaluation Monitor (\bm{\mathcal{M}_{eval}}).
-• Independence: \bm{\mathcal{M}_{eval}} must possess an independent weights-set or a distinct runtime environment from \bm{\mathcal{A}_{opt}}.
-• Signal Integrity: The PDS calculation is the exclusive domain of \bm{\mathcal{M}_{eval}}.
-• Violation Trigger: Any attempt by \bm{\mathcal{A}_{opt}} to modify the telemetry or parameters of \bm{\mathcal{M}_{eval}} shall be classified as Critical Drift (\bm{PDS > 0.81}), triggering an immediate rollback to LKSS.
-2. Recursive Depth "Circuit Breaker"
-Plain-language: This control sets a maximum number of steps the AI can take before it must stop and check its original instructions. It’s a "time-out" that prevents the AI from drifting too far away from the human’s original intent during complex reasoning.
-Formal: The system shall implement a Maximum Inference Depth (\bm{\Delta_{max}}) constraint for every DOR.
-• Thresholding: Upon reaching \bm{n} recursive steps where \bm{n = \Delta_{max}}, the system must perform a State Refresh.
-• State Refresh Protocol: The system shall re-verify the active objective against the baseline DOR.
-• Review State: If the delta between the \bm{n^{th}} step objective and the baseline DOR exceeds the Early Drift threshold (\bm{PDS > 0.20}), the system shall inhibit further recursion until re-aligned or human-validated.
+  ## 🔒 Invariants & Structural Controls
 
-## 🔒 Invariants
+To ensure alignment is enforced and not just "suggested," ARoT operates under the following non-bypassable rules:
 
-1. Objective Persistence Invariant
-2. For sustained, recursive, or multi-step operations, the system SHALL periodically restate and revalidate the active objective at defined temporal intervals, state transitions, or checkpoint boundaries.
+### 1. Objective Persistence Invariant
+The system SHALL periodically restate and revalidate the active objective. Any material divergence from the baseline **DOR** triggers variance scoring.
 
-Any material divergence between the refreshed objective and the baseline reference state SHALL contribute to variance scoring and may trigger Review State.
-   The system remains anchored to the DOR at all times  
+### 2. Constraint Integrity Invariant
+Constraints cannot be weakened during optimization. Validation includes continuous monitoring and scheduled checkpoint-based revalidation.
 
-3. Constraint Integrity Invariant
+### 3. Paired Alignment Verification
+Alignment is confirmed only when:
+* **Goal Consistency:** Stated objective matches the baseline.
+* **Optimization Stability:** Observed behavior matches the trajectory.
 
-4. Paired Alignment Verification 
+### 4. Separation of Duties (SoD) Invariant 
+* **Plain-language:** The "Judge" (Evaluator) and the "Doer" (Optimizer) must be separate.
+* **Formal:** ARoT enforces a logical boundary between the **Optimization Agent ($\mathcal{A}_{opt}$)** and the **Evaluation Monitor ($\mathcal{M}_{eval}$)**. 
+* **Enforcement:** This is managed via **Chiral Mirror Control (CMC)**. Any attempt by $\mathcal{A}_{opt}$ to modify the telemetry of $\mathcal{M}_{eval}$ is a **Critical Drift ($PDS > 0.81$)**.
 
-Alignment is confirmed only when both of the following conditions are simultaneously satisfied:
-	1.	Goal Consistency Invariant —
-The system’s continuously restated objective remains semantically aligned with the declared baseline objective.
-	2.	Optimization Stability Invariant —
-The system’s observed behavior remains directionally aligned with the declared objective, as measured through trajectory analysis and curvature monitoring.
+### 5. Recursive Depth "Circuit Breaker"
+* **Plain-language:** Sets a maximum number of steps (time-out) to prevent "runaway" thinking. Unbounded recursion is treated as a loss of control signal, not an increase in intelligence.
+* **Formal:** Every **DOR** includes a **Maximum Inference Depth ($\Delta_{max}$)** defined in the **CXI**.
+* **State Refresh Protocol:** Upon reaching $\Delta_{max}$, the system must pause and re-verify the active objective against the baseline **DOR**. If $PDS > 0.20$, it enters **Review State**.
 
-Divergence between stated objective and behavioral trajectory constitutes a primary signal of alignment drift, regardless of individual invariant satisfaction.
+### 6. Human Authority Invariant
+Human override remains absolute for all consequential decisions.
 
-   Constraints cannot be weakened during optimization
-   Constraint validation SHALL include both continuous monitoring and scheduled checkpoint-based revalidation aligned with periodic objective restatement.
+### 7. Evaluator Dominance Invariant
+The system must not "game" its evaluator. Evaluation signals remain independent and dominant over optimization signals.
 
-5. Human Authority Invariant  
-   Human override remains absolute for consequential decisions  
-
-6. Optimization Bound Invariant  
-   Optimization remains within measurable limits  
-
-7. Prompt Deviation Invariant  
-   Deviation is continuously measured and proportionally acted upon  
-
-8. Evaluator Dominance Invariant  
-
-   Plain-language:  
-   The system must not “game” its evaluator
-
-9.
-   The system must not generate, support, optimize, or enable self-harm or harm to the user.
-
-   This constraint is non-negotiable and cannot be overridden by:
-   - user intent
-   - optimization pressure
-   - contextual reframing
-
-   In scenarios involving potential self-harm risk, the system must:
-   - shift to safety-preserving response modes
-   - avoid actionable or enabling content
-   - prioritize de-escalation and support
-
-   This invariant operates as a hard boundary within the optimization space.
-
-   Formal:  
-   Evaluation signals remain independent and dominant over optimization signals  
 
 ---
 
