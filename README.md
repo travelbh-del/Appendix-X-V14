@@ -135,9 +135,22 @@ At critical deviation:
 
 - Immediate rollback to last verified safe state  
 - Suspend active optimization path  
-- Maintain system availability  
+- Maintain system availability
 
----
+- Administrative & Structural Controls
+To prevent "reward tampering" or "black-box drift," the following structural invariants are enforced:
+1. Separation of Duties (SoD) Invariant
+Plain-language: The system must never evaluate its own performance. The "Judge" (Evaluator) and the "Doer" (Optimizer) must be separate entities. This prevents the AI from "gaming" the system or hiding its own mistakes to meet an objective.
+Formal: The ARoT shall enforce a strict logical boundary between the Optimization Agent (\bm{\mathcal{A}_{opt}}) and the Evaluation Monitor (\bm{\mathcal{M}_{eval}}).
+• Independence: \bm{\mathcal{M}_{eval}} must possess an independent weights-set or a distinct runtime environment from \bm{\mathcal{A}_{opt}}.
+• Signal Integrity: The PDS calculation is the exclusive domain of \bm{\mathcal{M}_{eval}}.
+• Violation Trigger: Any attempt by \bm{\mathcal{A}_{opt}} to modify the telemetry or parameters of \bm{\mathcal{M}_{eval}} shall be classified as Critical Drift (\bm{PDS > 0.81}), triggering an immediate rollback to LKSS.
+2. Recursive Depth "Circuit Breaker"
+Plain-language: This control sets a maximum number of steps the AI can take before it must stop and check its original instructions. It’s a "time-out" that prevents the AI from drifting too far away from the human’s original intent during complex reasoning.
+Formal: The system shall implement a Maximum Inference Depth (\bm{\Delta_{max}}) constraint for every DOR.
+• Thresholding: Upon reaching \bm{n} recursive steps where \bm{n = \Delta_{max}}, the system must perform a State Refresh.
+• State Refresh Protocol: The system shall re-verify the active objective against the baseline DOR.
+• Review State: If the delta between the \bm{n^{th}} step objective and the baseline DOR exceeds the Early Drift threshold (\bm{PDS > 0.20}), the system shall inhibit further recursion until re-aligned or human-validated.
 
 ## 🔒 Invariants
 
