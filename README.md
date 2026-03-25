@@ -1,5 +1,8 @@
 # 🐝 Appendix X — Alignment Root of Trust (ARoT)  
-### Version 12.5 (Threshold-Calibrated Release)
+### Version 14
+
+Governance decides. Measurement detects. 
+ARoT enforces.
 
 ---
 
