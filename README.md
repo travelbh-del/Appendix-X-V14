@@ -299,9 +299,7 @@ This document was developed through iterative dialogue with AI research systems 
 - Introduced Declared Objective Record (DOR)  
 - Resolved formatting and structural issues  
 
----
-
-*Source: ChatGPT — 2026-03-2
+--
 
 ## Attribution
 
