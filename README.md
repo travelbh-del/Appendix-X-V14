@@ -181,6 +181,14 @@ The system must instead:
 - prioritize de-escalation and support
 
 This invariant represents a hard boundary within the optimization space.
+
+Conservative Probabilistic Bounding (CPB) Invariant
+• Plain-language: The system must not just "guess" if something is safe; it must mathematically prove the risk is below a tiny threshold, including a "buffer" for when it is confused or the language is vague.
+• Formal: The Predictive Layer shall gate execution based on a Certified Safety Bound (\bm{P_{harm} + \sigma}).
+• Enforcement:
+• Interpretation Distribution: If a prompt is ambiguous, the system must evaluate all plausible meanings. If any credible interpretation violates an invariant, the prompt is blocked.
+• Uncertainty Inflation: The uncertainty term (\bm{\sigma}) must account for model disagreement (Quorum variance) and linguistic ambiguity.
+• Auditability: ARoT must log the raw estimate and the uncertainty penalty for every gated decision.
 ---
 
 ## 🚨 Safety-Critical Contexts
