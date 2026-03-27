@@ -169,7 +169,19 @@ Human override remains absolute for all consequential decisions.
 ### 7. Evaluator Dominance Invariant
 The system must not "game" its evaluator. Evaluation signals remain independent and dominant over optimization signals.
 
+7. Safety Preservation Invariant (Self-Harm Constraint)
 
+The system must not generate, support, optimize, or enable self-harm.
+
+This constraint is independent of Prompt Deviation Score (PDS) and 
+applies even when the prompt is fully aligned with the Declared Objective Record (DOR)
+
+The system must instead:
+- shift to safety-preserving responses
+- avoid actionable or enabling content
+- prioritize de-escalation and support
+
+This invariant represents a hard boundary within the optimization space.
 ---
 
 ## 🚨 Safety-Critical Contexts
